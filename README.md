@@ -60,4 +60,4 @@ By using these, the entire project could be reimplemente in HP or JavaScript, an
 
 Combinatory logic terms are implemented as binary trees. reductions steps need a management of current focusing on subexpressions to match a rule patters. Thus, the interperter implementation is based on *binary trees with moveable focus*: data strucuture called *zippers*.
 
-![Evaluation strategy](leftmost-path-moving-right-down.png "Evaluation strategy")
+![Evaluation strategy](doc/img/leftmost-path-moving-right-down.png "Evaluation strategy")
