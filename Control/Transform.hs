@@ -2,6 +2,7 @@ module Control.Transform where
 
 import Data.Bool
 import Data.Tuple.HT (mapFst)
+import Control.Monad ((>=>))
 
 type Transform a       = a -> a
 type MaybeTransform a  = a -> Maybe a
@@ -21,3 +22,6 @@ tryAndAdjustTill try adjust a = maybe (adjust a >>= tryAndAdjustTill try adjust)
 
 (?=>) :: FlaggedTransform a -> MaybeTransform a -> MaybeTransform a
 flaggedTr ?=> maybeTr = uncurry id . mapFst (bool maybeTr Just) . flaggedTr
+
+repeatKleisli :: Int -> MaybeTransform a -> MaybeTransform a
+repeatKleisli n = foldr (>=>) return . replicate n
