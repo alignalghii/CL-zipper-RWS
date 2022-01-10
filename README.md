@@ -12,20 +12,20 @@ The  source contains no monad transformers yet.
 
 ### Tutorials on monad transformers
 
-Haskell tutorials and articles about advanced funtional programming and design usually explain the concept and use of monad transformers exemplified by small *interpreter* programs:a small embedded language is presented — usually a language of a small pocket calculator software — whose capabilities are augmented gradually by logging (tracing), error reporting, variable usage, confogurable user options etc.
+Haskell tutorials and articles about advanced funtional programming and design usually explain the concept and use of monad transformers exemplified by small *interpreter* programs:a small embedded language is presented — usually a language of a small pocket calculator software — whose capabilities are augmented gradually by logging (tracing), error reporting, variable usage, configurable user options etc.
 
-The main idea is that all these additional features can be added rather seamlessly and in a modular way to the basic calculator functionality, which can be kept easily readable and simple. Monad transformers provide a way to keep the „core algorithm” and the „effectful extensions” apart, loosely coupled, untangled. Spoiler: this is not entirely true, monad transformers cannot fill in this vision without compromoses.
+The main idea is that all these additional features can be added rather seamlessly and in a modular way to the basic calculator functionality, which can be kept easily readable and simple. Monad transformers provide a way to keep the „core algorithm” and the „effectful extensions” apart, loosely coupled, untangled. Spoiler: this is not entirely true, monad transformers cannot fill in this vision without compromises.
 
 ### A project in its virgin stage, exemplifying the possible usefulness of monad transformers without actully using them
 
-This project is inteded to provide a somewhat more complex base project than the familiar pocket calculator language of the tutorials. It is an interpreter, but not of a simple pocket calculator language. Instead, a Turing-complete algorithmic language is implemented. It is one of the simples in this category: it is essentially an implementation of *combinatory logic*. Combinatory logic is a similar theoretical framework as lambda calculus. So, the core part of the project is a „leftmost outermost” traversal of a binary tree while matching certain rule patterns: it implements comninatory logic along a call-by name (lazy evalulation) strategy, thus it provodes a tiny fuctional programming language belonging to the family of Miranda, Haskell, Clean.
+This project is inteded to provide a somewhat more complex base project than the familiar pocket calculator language of the tutorials. It is an interpreter, but not of a simple pocket calculator language. Instead, a Turing-complete algorithmic language is implemented. It is one of the simplest in this category: it is essentially an implementation of *combinatory logic*. Combinatory logic is a similar theoretical framework as lambda calculus. So, the core part of the project is a „leftmost outermost” traversal of a binary tree while matching certain rule patterns: it implements comninatory logic along a call-by name (lazy evalulation) strategy, thus it provodes a tiny fuctional programming language belonging to the family of Miranda, Haskell, Clean.
 
-Althought theoretically it is Turing complete, it is a simpla mathematical calculus, lacking any systactic sugar, usar friendliness, and lacking also effects. If they will be implemented in future, most probably it can be done the best way with monad transformers.
+Althought theoretically it is Turing complete, it is a simple mathematical calculus, lacking any systactic sugar, usar friendliness, and lacking also effects. If they will be implemented in future, most probably it can be done the best way with monad transformers.
 
 In short: this project does not contain monad transformers yet. It provides a starting point, an apropos on which the use of monad transformers can be exemplified later in future.
 In its current stage, it can *reduce* (evaluate) *terms* (expressions) of combinatory logic terms. The reductions steps of these terms can be regarded as the operation of a pure lazy functional programming language. Despite of being minimalistic, it presents all practical problems which can exemplyfy the usefulness of architectural design patterns.
 
-The main advantage of the vision of the whole project: combinatory logic provides a very well balanced trade-off:
+The main advantage of the vision of the whole project: combinatory logic provides a well balanced trade-off between two antagonistic desirable didactic properties, described below.
  * it is simple enough to exemplify a pure interpreter: mathematically it is a very pure and a well-described theory is underlying it.
  * still, it is complicated enough to provide need and meaning to advanced features implemantable via monad transformers: it can provide good apropos for non-trivial use cases of the most important monad transformer examples.
 
@@ -37,8 +37,8 @@ Features to be added in future:
 
 ### The RWS monad transformer(s)
 
-RWS is a compound stack of monad transfomers consisting of effect functionalities of a Reader, a Writer, and a State monad.
-In this project\'s context, use the `State` monad for executon step counting (safety check against infinite runaway), use Reader for user configurability (optioning evaluation stategy as lazy vs strict, toggling step counting on and off, selection the set of base combinators). Writer monad is useful for tracing. 
+`RWS` is a compound stack of monad transfomers consisting of effect functionalities of a `Reader`, a `Writer`, and a `State` monad.
+In this project\'s context, use the `State` monad for executon step counting (safety check against infinite runaway), use `Reader` for user configurability (optioning evaluation stategy as lazy vs strict, toggling step counting on and off, selection the set of base combinators). `Writer` monad is useful for tracing.
 
 ### Alternative approaches than monad transformers?
 
@@ -50,14 +50,14 @@ As for a few words about connections to Agda: representing Vector and Matrix man
 
 Category: here I am proving (in intuitionistic logic and in Gentzen-style natural deduction) that in the category of **Set**s epimorphism coincide with surjective functions.
 
-### Transferring functional programming thechniques to conventional languages
+### Transferring functional programming techniques to conventional languages
 
-Another objective is to present techniques of „conventional”, „imperative” programming languages to implement core Haskell techniques. Any familiary algebraic data type can be implemented in languages like PHP or JavaScript via a technique called „case objects” (originally made popular in the Scala community). Furthermore, Haskell typeclasses — among them the most often used monads — can be implemented by PHP or JavaScript *trait* constructs over these case objects. Samples for all these can be found in the `doc` map of this project.
+Another objective is to present techniques of „conventional”, „imperative” programming languages to implement core Haskell techniques. Any familiary algebraic data type can be implemented in languages like PHP or JavaScript via a technique called „case objects” (originally made popular in the Scala community). Furthermore, Haskell typeclasses — among them the most often used monads — can be implemented by PHP or JavaScript *trait* constructs over these case objects. Samples for all these can be found in the [doc](doc) folder of this project: [doc/PHP](doc/PHP) and [doc/JavaScript](doc/PHP).
 
-By using these, the entire project could be reimplemente in HP or JavaScript, and so the project can be given a web application user interface. Of course, Haskell itself provides its own ecosystem: for example, Scotty among the simplest ones.
+By using these, the entire project could be reimplemented in PHP or JavaScript, and so the project can be given a web application user interface. Of course, Haskell itself provides its own ecosystem: for example, Scotty among the simplest ones.
 
 ## Implementation
 
-Combinatory logic terms are implemented as binary trees. reductions steps need a management of current focusing on subexpressions to match a rule patters. Thus, the interperter implementation is based on *binary trees with moveable focus*: data strucuture called *zippers*.
+Combinatory logic terms are implemented as binary trees. reductions steps need a management of current focusing on subexpressions to match a rule patters. Thus, the interperter implementation is based on *binary trees with moveable focus*: data structure called *zippers*.
 
 ![Evaluation strategy](doc/img/leftmost-path-moving-right-down.A6.landscape.png "Evaluation strategy")
