@@ -2,16 +2,29 @@ module CL.CL_zipper where
 
 import CL.Base (Base)
 import CL.CL (reduction_rules)
-import Data.MaybeExt (tryAndAdjustTill)
-import Data.Tree2_zipper (Tree2_zipper, move, rightward, upWhenDir, leftmost, Direction(Left))
+import Data.Direction (Direction (..))
+import Control.Transform (FlaggedTransform, MaybeTransform, (?=>))
+import Control.Monad ((>=>))
+import Control.Applicative ((<|>))
+import Data.Tree2_zipper (Tree2_zipper, move, leftward, rightward, upWhenDir, leftmost, toSiblingDir)
 import Data.Tuple.HT (mapFst)
-import Prelude hiding (Left)
+import Prelude hiding (Left, Right)
 
 type CL_zipper = Tree2_zipper Base
 
-reduction_step, left_path_reduction_step, local_reduction_step  :: CL_zipper -> Maybe CL_zipper
-reduction_step = tryAndAdjustTill left_path_reduction_step $ move rightward
-left_path_reduction_step = tryAndAdjustTill local_reduction_step (upWhenDir Left) . leftmost
-local_reduction_step (cl, cl_back) = do
-    cl' <- reduction_rules cl
-    return (cl', cl_back)
+reduction_step_trace :: MaybeTransform CL_zipper
+reduction_step_trace = functionLine ?=> (jumpToArgs >=> argumentsLine)
+
+functionLine :: FlaggedTransform CL_zipper
+functionLine zipper@(cl, backsteps) = case reduction_rules cl of
+    Just cl' -> (True, (cl', backsteps))
+    Nothing  -> case move leftward zipper of
+        Nothing      -> (False, zipper)
+        Just zipper' -> functionLine zipper'
+
+argumentsLine :: MaybeTransform CL_zipper
+argumentsLine zipper = reduction_step_trace zipper <|> (nextArg >=> argumentsLine) zipper
+
+jumpToArgs, nextArg :: MaybeTransform CL_zipper
+jumpToArgs = toSiblingDir Right
+nextArg    = upWhenDir Right >=> upWhenDir Left >=> move rightward
