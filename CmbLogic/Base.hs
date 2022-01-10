@@ -1,3 +1,3 @@
-module CL.Base where
+module CmbLogic.Base where
 
 data Base = S | K deriving Show

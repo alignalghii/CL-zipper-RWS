@@ -1,7 +1,7 @@
-module CL.Reduction where
+module CmbLogic.Reduction where
 
-import CL.CL (CL)
-import CL.CL_zipper (reduction_step_trace)
+import CmbLogic.CL (CL)
+import CmbLogic.CL_zipper (reduction_step_trace)
 import Data.Tree2_zipper (startZipper, forgetZipper)
 import Control.Transform (MaybeTransform)
 

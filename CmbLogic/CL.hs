@@ -1,7 +1,7 @@
-module CL.CL where
+module CmbLogic.CL where
 
 import Data.Tree2
-import CL.Base
+import CmbLogic.Base
 
 type CL = Tree2 Base
 

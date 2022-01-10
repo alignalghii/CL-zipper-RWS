@@ -1,9 +1,9 @@
 module Main where
 
-import CL.CL
-import CL.CL_zipper
-import CL.Samples
-import CL.Reduction
+import CmbLogic.CL
+import CmbLogic.CL_zipper
+import CmbLogic.Samples
+import CmbLogic.Reduction
 import Data.Tree2_zipper
 import Control.Transform ((?=>))
 import Control.Monad ((>=>))

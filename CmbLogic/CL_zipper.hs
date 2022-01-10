@@ -1,7 +1,7 @@
-module CL.CL_zipper where
+module CmbLogic.CL_zipper where
 
-import CL.Base (Base)
-import CL.CL (reduction_rules)
+import CmbLogic.Base (Base)
+import CmbLogic.CL (reduction_rules)
 import Data.Direction (Direction (..))
 import Control.Transform (FlaggedTransform, MaybeTransform, (?=>))
 import Control.Monad ((>=>))
