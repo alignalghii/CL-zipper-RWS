@@ -1,9 +1,9 @@
 module CmbLogic.Reduction where
 
-import CmbLogic.CL (CL)
-import CmbLogic.CL_zipper (reduction_step_trace)
+import CmbLogic.Term (CL)
+import CmbLogic.Reduction.Strategy (reduction_strategy_step)
 import Data.Tree2_zipper (startZipper, forgetZipper)
 import Control.Transform (MaybeTransform)
 
 reduction_step :: MaybeTransform CL
-reduction_step = fmap forgetZipper . reduction_step_trace . startZipper
+reduction_step = fmap forgetZipper . reduction_strategy_step . startZipper

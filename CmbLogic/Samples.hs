@@ -1,6 +1,6 @@
 module CmbLogic.Samples where
 
-import CmbLogic.CL
+import CmbLogic.Term
 import Control.Transform
 
 k_, dly :: Transform CL

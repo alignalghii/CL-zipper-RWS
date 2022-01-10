@@ -1,22 +1,12 @@
-module CmbLogic.CL where
+module CmbLogic.Reduction.Rules where
 
-import Data.Tree2
-import CmbLogic.Base
+import CmbLogic.Term (CL)
+import CmbLogic.Base (Base (K, S))
+import Data.Tree2 (Tree2 (Leaf, Branch))
+import Control.Transform (MaybeTransform)
 
-type CL = Tree2 Base
 
-(<@>) :: CL -> CL -> CL
-(<@>) = Branch
-infixl 7 <@>
-
-lit :: Base -> CL
-lit = Leaf
-
-s, k :: CL
-s = Leaf S
-k = Leaf K
-
-reduction_rules :: CL -> Maybe CL
+reduction_rules :: MaybeTransform CL
 reduction_rules (Branch (Branch (Leaf K            ) f) _) = Just f
 reduction_rules (Branch (Branch (Branch (Leaf S) k ) f) x) = Just $ Branch (Branch k x) (Branch f x)
 reduction_rules _                                          = Nothing
