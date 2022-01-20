@@ -23,5 +23,5 @@ tryAndAdjustTill try adjust a = maybe (adjust a >>= tryAndAdjustTill try adjust)
 (?=>) :: FlaggedTransform a -> MaybeTransform a -> MaybeTransform a
 flaggedTr ?=> maybeTr = uncurry id . mapFst (bool maybeTr Just) . flaggedTr
 
-repeatKleisli :: Int -> MaybeTransform a -> MaybeTransform a
+repeatKleisli :: Int -> Transform (MaybeTransform a)  --  Int -> MaybeTransform a -> MaybeTransform a
 repeatKleisli n = foldr (>=>) return . replicate n
