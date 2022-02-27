@@ -3,7 +3,7 @@ module Data.Tree2_zipper where
 import Data.Tree2
 import Data.Direction
 import Data.Maybe.HT (toMaybe)
-import Data.Tuple.HT (mapFst)
+import Control.Arrow (first)  -- Data.Tuple.HT (mapFst)
 import Control.Monad ((>=>))
 import Control.Transform (Transform, MaybeTransform, iterateMaybe)
 import Prelude hiding (Left, Right)
@@ -47,7 +47,7 @@ upWhileDir :: Direction -> Transform (Tree2_zipper a)
 upWhileDir = iterateMaybe . upWhenDir
 
 upWhenDir :: Direction -> MaybeTransform (Tree2_zipper a)
-upWhenDir dir =  up >=> (uncurry toMaybe . mapFst (== dir))
+upWhenDir dir =  up >=> (uncurry toMaybe . first (== dir))  -- we use `first` here as `mapFst`
 
 toSiblingDir :: Direction -> MaybeTransform (Tree2_zipper a)
 toSiblingDir dir = upWhenDir (oppositeDir dir) >=> move (Just dir)
