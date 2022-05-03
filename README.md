@@ -14,7 +14,7 @@ A zipper-based implementation of a combinatory logic programming language with l
     - [A project in its virgin stage, exemplifying the possible usefulness of monad transformers without actully using them](#a-project-in-its-virgin-stage-exemplifying-the-possible-usefulness-of-monad-transformers-without-actully-using-them)
     - [The RWS monad transformer(s)](#the-rws-monad-transformers)
 - [Related projects](#related-projects)
-    - [Alternative approaches than monad transformers?](#alternative-approaches-than-monad-transformers)
+    - [Alternative approaches other than monad transformers?](#alternative-approaches-other-than-monad-transformers)
     - [Transferring functional programming techniques to conventional languages](#transferring-functional-programming-techniques-to-conventional-languages)
 - [About combinatory logic as a programming laguage](#about-combinatory-logic-as-a-programming-laguage)
 - [Implementation](#implementation)
@@ -64,7 +64,7 @@ In this project\'s context, use the `State` monad for executon step counting (sa
 
 ## Related projects
 
-### Alternative approaches than monad transformers?
+### Alternative approaches other than monad transformers?
 
 Monad transformers are sometimes regarded as theoretically suspicious and ugly, still, the question of a „purer” alternative remains open.
 The Utrecht University\'s UUAGC is an interesting approach to provide surprizing modularity, a maybe stronger „glue” than that of monads and monad transformers.
