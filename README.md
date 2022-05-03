@@ -1,6 +1,23 @@
+---
+[[To project source]](#top) •|||• [[Back to central personal homepage]](https://alignalghii.github.io)
+
+---
+
 # A combinatory logic interpreter for further extensibility
 
-A zpper-based implementation of a combinatory logic programming language with lazy evaluation and further extensibility
+A zipper-based implementation of a combinatory logic programming language with lazy evaluation and further extensibility
+
+## Table of contents
+
+- [Project goals and objectives](#project-goals-and-objectives)
+    - [Tutorials on monad transformers](#tutorials-on-monad-transformers)
+    - [A project in its virgin stage, exemplifying the possible usefulness of monad transformers without actully using them](#a-project-in-its-virgin-stage-exemplifying-the-possible-usefulness-of-monad-transformers-without-actully-using-them)
+    - [The RWS monad transformer(s)](#the-rws-monad-transformers)
+- [Related projects](#related-projects)
+    - [Alternative approaches than monad transformers?](#alternative-approaches-than-monad-transformers)
+    - [Transferring functional programming techniques to conventional languages](#transferring-functional-programming-techniques-to-conventional-languages)
+- [About combinatory logic as a programming laguage](#about-combinatory-logic-as-a-programming-laguage)
+- [Implementation](#implementation)
 
 ## Project goals and objectives
 
@@ -40,6 +57,11 @@ Features to be added in future:
 `RWS` is a compound stack of monad transfomers consisting of effect functionalities of a `Reader`, a `Writer`, and a `State` monad.
 In this project\'s context, use the `State` monad for executon step counting (safety check against infinite runaway), use `Reader` for user configurability (optioning evaluation stategy as lazy vs strict, toggling step counting on and off, selection the set of base combinators). `Writer` monad is useful for tracing.
 
+---
+[[To the top of this README]](#readme) •|||• [[To project source]](#top) •|||• [[Back to central personal homepage]](https://alignalghii.github.io)
+
+---
+
 ## Related projects
 
 ### Alternative approaches than monad transformers?
@@ -63,6 +85,11 @@ By using these, the entire project could be reimplemented in PHP or JavaScript b
 Another exmple for using Haskell techniques in JavasCript is a collision detection program based on solving linear inequality systemms by Fourier-Motzkin elimination. [Haskell code] and [JavaScript code]
 
 In summary: Haskell projects sometimes can be implemented in conventional languages in a straightforward, although not trivial way. This means also a way to provide a web application user interface to a Haskell project. Of course, Haskell itself has its own ecosystem in web programming too: for example, Scotty among the simplest ones. Two very simple Scotty projects of mine implement smple mathematical games and problems: [Stones on a beach] and [Gold or goat].
+
+---
+[[To the top of this README]](#readme) •|||• [[To project source]](#top) •|||• [[Back to central personal homepage]](https://alignalghii.github.io)
+
+---
 
 ## About combinatory logic as a programming laguage
 
@@ -99,3 +126,8 @@ My answer to this question is: let us algorithmize the following traversal:
 In summary: traverse the tree with a zipper with its focus starting from the root node, gowing down the function line, from the bottom of function line the jump to the bottom of the arguments line, and go up along the arguments line! During Your path downward on the function line, simple check at each node of the line whether the current node is a regexp! During Your upward path along the arguments line, at each node make a complete recursive call (with current node regarded as the root of a subtree under it), it is not enogh to check the current node!
 
 This algorithm warrants that You will always find the leftmost outermost regexp firstm so You will have all benefits of lazy evaluation, and You will have Your implemented combinatory logic lagnuage not only Turing complete, but also programmable in nice patterns and You get also an automatically emergent recursive construct.
+
+---
+[[To the top of this README]](#readme) •|||• [[To project source]](#top) •|||• [[Back to central personal homepage]](https://alignalghii.github.io)
+
+---
